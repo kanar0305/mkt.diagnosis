@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI時代 集客基盤の健康診断＆機会損失査定</title>
+    <style>
+        :root {
+            --primary-color: #0f2d59;
+            --accent-color: #e24b4a;
+            --bg-color: #f4f6f9;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            background: #edf2f7;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .block-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin: 35px 0 15px 0;
+        }
+
+        .question-box {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-label {
+            display: block;
+            padding: 12px 15px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .option-label:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option-label input {
+            margin-right: 10px;
+        }
+
+        /* ラジオボタン選択時のスタイル */
+        .option-label.selected {
+            background: #ebf8ff;
+            border-color: #3182ce;
+            font-weight: bold;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #1a447e;
+        }
+
+        /* 結果画面のスタイル */
+        #result-screen {
+            display: none;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .result-status {
+            display: inline-block;
+            padding: 6px 16px;
+            font-weight: bold;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .status-red { background: #fcebeb; color: #a32d2d; }
+        .status-yellow { background: #faeeda; color: #854f0b; }
+        .status-blue { background: #e6fffa; color: #006853; }
+        .status-green { background: #eaf3de; color: #3b6d11; }
+
+        .counter-container {
+            background: #1a202c;
+            color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .counter-label {
+            font-size: 12px;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .counter-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #e53e3e;
+        }
+        .counter-amount.zero {
+            color: #38a169;
+        }
+
+        .result-text-box {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+
+        .restart-btn {
+            background: #718096;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 18px; }
+            .counter-amount { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 入力フォーム画面 -->
+    <form id="quiz-form">
+        <h1>AI時代 集客基盤の健康診断＆機会損失査定</h1>
+        <p class="description">現在の集客状況について本音でお答えください（所要時間：約3分）</p>
+
+        <!-- ■ 第1ブロック -->
+        <div class="block-title">■ 第1ブロック：経営の現在地</div>
+        
+        <div class="question-box">
+            <p class="question-text">Q1. 御社の主なビジネス形態はどちらですか？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q1" value="1" required> 【信頼・専門職型】士業・コンサル・各種専門職・法人営業</label>
+                <label class="option-label"><input type="radio" name="q1" value="2"> 【高単価・決断型】不動産・建築・リフォーム・高額サービス</label>
+                <label class="option-label"><input type="radio" name="q1" value="3"> 【地域密着・店舗型】飲食店・BAR・サロン・クリニック・実店舗</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q2. おおよその「現在の年商（売上規模）」を教えてください。</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q2" value="30000000" required> 〜3,000万円</label>
+                <label class="option-label"><input type="radio" name="q2" value="65000000"> 3,000万〜1億円</label>
+                <label class="option-label"><input type="radio" name="q2" value="200000000"> 1億〜3億円</label>
+                <label class="option-label"><input type="radio" name="q2" value="300000000"> 3億円以上</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q3. 現在、月間でおおむね「いくらの広告宣伝費」を投資していますか？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q3" value="1" required> ほぼゼロ（紹介や人脈メイン）</label>
+                <label class="option-label"><input type="radio" name="q3" value="2"> 〜10万円</label>
+                <label class="option-label"><input type="radio" name="q3" value="3"> 10万〜30万円</label>
+                <label class="option-label"><input type="radio" name="q3" value="4"> 30万〜100万円</label>
+                <label class="option-label"><input type="radio" name="q3" value="5"> 100万円以上</label>
+            </div>
+        </div>
+
+        <!-- ■ 第2ブロック -->
+        <div class="block-title">■ 第2ブロック：見込み客との「最初の接点」の品質</div>
+        
+        <div class="question-box">
+            <p class="question-text">Q4. Googleマップの口コミや評価に対する、現在のリアルな運用状況は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q4" value="3" required> 直近1ヶ月以内にも新しい口コミがあり、感謝や誠実な返信をすべて返している</label>
+                <label class="option-label"><input type="radio" name="q4" value="2"> 口コミはあるが、ここ数ヶ月は更新が止まっている（または返信ができていない）</label>
+                <label class="option-label"><input type="radio" name="q4" value="1"> ほとんど口コミがない、またはネガティブな評価への対応に苦慮している</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q5. 業界内の主要ポータルサイトへの出稿に対する本音は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q5" value="3" required> ポータルに依存せず、独自の費用対効果（CPA）をクリアして黒字化できている</label>
+                <label class="option-label"><input type="radio" name="q5" value="2"> 掲載費が年々上がる一方で反響は減っており、やめる恐怖から払い続けている</label>
+                <label class="option-label"><input type="radio" name="q5" value="1"> 掲載していない、または投資に対して十分な見返りを感じられていない</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q6. スマホを持ったユーザーが、御社のホームページ（HP）を訪れた際の導線は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q6" value="3" required> スマホ対応は万全で、「今すぐ予約・LINE相談」へ迷わず1クリックで繋がる</label>
+                <label class="option-label"><input type="radio" name="q6" value="2"> スマホで見られるが、文字が小さかったり、問い合わせフォームの入力が煩雑</label>
+                <label class="option-label"><input type="radio" name="q6" value="1"> 何年も更新しておらず情報が古い、またはホームページ自体を用意していない</label>
+            </div>
+        </div>
+
+        <!-- ■ 第3ブロック -->
+        <div class="block-title">■ 第3ブロック：新しい情報インフラへの対応状況</div>
+
+        <div class="question-box">
+            <p class="question-text">Q7. ChatGPT、Gemini、Perplexity等のAIに「地域名＋業種」で尋ねた際、何が起きますか？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q7" value="3" required> AIが自社を「おすすめの選択肢」として明確に上位推薦してくれる</label>
+                <label class="option-label"><input type="radio" name="q7" value="2"> 調べたことがない、またはAIに自社がどう表示されるか全く把握していない</label>
+                <label class="option-label"><input type="radio" name="q7" value="1"> 試したが、競合他社ばかりが推薦され、自社は名前すら出てこない</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q8. Googleなどの検索エンジンにおける、自社サイトの「表示順位」の手応えは？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q8" value="3" required> 狙った主要キーワードで1ページ目に君臨し、安定して新規客が流入している</label>
+                <label class="option-label"><input type="radio" name="q8" value="2"> 昔は上位だったが最近アクセスが落ちた（検索の仕組みの変化を感じる）</label>
+                <label class="option-label"><input type="radio" name="q8" value="1"> 自社の「会社名・店舗名」でしか検索に引っかからない</label>
+            </div>
+        </div>
+
+        <!-- ■ 第4ブロック -->
+        <div class="block-title">■ 第4ブロック：マーケティング投資の費用対効果</div>
+
+        <div class="question-box">
+            <p class="question-text">Q9. 実施しているWeb広告の「顧客獲得単価」の把握度は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q9" value="3" required> 「新規の顧客1人を得るのにいくらかかったか」を、毎月数字で厳密に把握している</label>
+                <label class="option-label"><input type="radio" name="q9" value="2"> 運用を代理店に丸投げしており、毎月のレポートを見ても実利益に繋がっているか不明</label>
+                <label class="option-label"><input type="radio" name="q9" value="1"> 広告は実施していない、または過去に実施したが投資に見合う成果が得られなかった</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q10. Instagram、TikTok、YouTube等の発信活動の、実際のビジネスへの貢献度は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q10" value="3" required> 自社の専門性や人柄が伝わる発信を継続でき、ファン化や成約に直接繋がっている</label>
+                <label class="option-label"><input type="radio" name="q10" value="2"> アカウントはあるが、単なる告知や日記になっており、投稿も途絶えがち</label>
+                <label class="option-label"><input type="radio" name="q10" value="1"> 運用の工数や制作コストに対して、十分なメリットを見出せていない（未実施含む）</label>
+            </div>
+        </div>
+
+        <!-- ■ 第5ブロック -->
+        <div class="block-title">■ 第5ブロック：既存の顧客資産と人脈の活用の仕組み</div>
+
+        <div class="question-box">
+            <p class="question-text">Q11. 過去に接点のあったお客様（既存リストや公式LINE、メルマガ）へのアプローチは？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q11" value="3" required> 定期的に有益な情報を配信し、リピートや紹介の掘り起こしがシステム化されている</label>
+                <label class="option-label"><input type="radio" name="q11" value="2"> アカウントやリストはあるが、キャンペーン時など必要な時しか配信していない</label>
+                <label class="option-label"><input type="radio" name="q11" value="1"> 特に行っていない。お客様側からの自発的なアプローチや連絡を待つ状態</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q12. 紹介や口コミによる新規獲得の再現性は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q12" value="3" required> 紹介が生まれる仕組みやルーティンがあり、毎月狙って新規を獲得できている</label>
+                <label class="option-label"><input type="radio" name="q12" value="2"> ありがたいことに紹介は起きるが、あくまで「運やタイミング頼み」で仕組みはない</label>
+                <label class="option-label"><input type="radio" name="q12" value="1"> 紹介が起きるルートがほぼなく、常に新規開拓に頭を悩ませている</label>
+            </div>
+        </div>
+
+        <!-- ■ 第6ブロック -->
+        <div class="block-title">■ 第6ブロック：これからの集客戦略に対する確信度</div>
+
+        <div class="question-box">
+            <p class="question-text">Q13. 日々変化するマーケティング手法や、外部からの営業提案に対する判断基準は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q13" value="3" required> 自社が何を最優先すべきか、客観的なデータをもとに自信を持って投資判断できている</label>
+                <label class="option-label"><input type="radio" name="q13" value="2"> 情報が多すぎて、SEO、MEO、AIO、SNSのどれに注力すべきか迷いがある</label>
+                <label class="option-label"><input type="radio" name="q13" value="1"> 営業提案を受けるたびに「今のままではマズイ」と焦り、目新しいものに手を出してしまう</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q14. 毎月の集客活動にかける「ご自身の時間やパワー」の負担感は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q14" value="3" required> 現場の仕組み化が進んでおり、経営者自身は本業や重要な意思決定に集中できている</label>
+                <label class="option-label"><input type="radio" name="q14" value="2"> 自分でSNSの投稿や確認作業を行っており、本業の時間を圧迫してストレスがある</label>
+                <label class="option-label"><input type="radio" name="q14" value="1"> 手をつけられていないが、将来の集客に対する漠然とした不安を常に抱えている</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-text">Q15. 今後3年間、現在の集客方法を継続することで「勝ち残れる」という確信は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q15" value="3" required> 時代がどう変わろうとも揺るがない、絶対的な独自の集客ルートを確立している</label>
+                <label class="option-label"><input type="radio" name="q15" value="2"> AIの普及やユーザーの行動変化のスピードが速く、現状維持では衰退するという危機感がある</label>
+                <label class="option-label"><input type="radio" name="q15" value="1"> 先行きを予測することが難しく、具体的な対策が後手に回っている</label>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">集客基盤の健康診断を実行する</button>
+    </form>
+
+    <!-- 結果表示画面 -->
+    <div id="result-screen">
+        <div class="result-header">
+            <h1 style="margin-bottom: 15px;">診断結果レポート</h1>
+            <div id="result-status-badge" class="result-status"></div>
+        </div>
+
+        <div class="counter-container">
+            <div class="counter-label">想定される年間機会損失額</div>
+            <div id="counter-display" class="counter-amount">¥0</div>
+        </div>
+
+        <div id="result-text" class="result-text-box"></div>
+
+        <button class="restart-btn" onclick="window.location.reload();">もう一度診断する</button>
+    </div>
+</div>
+
+<script>
+    // 選択肢をクリックした際に見た目を変更するJavaScript
+    document.querySelectorAll('.options-group').forEach(group => {
+        group.addEventListener('change', (e) => {
+            group.querySelectorAll('.option-label').forEach(label => {
+                label.classList.remove('selected');
+            });
+            if (e.target.checked) {
+                e.target.closest('.option-label').classList.add('selected');
+            }
+        });
+    });
+
+    // フォーム送信時の処理
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 基本情報の取得
+        const annualRevenue = parseInt(document.querySelector('input[name="q2"]:checked').value);
+
+        // スコア計算 (Q4〜Q15の計12問)
+        let totalScore = 0;
+        for (let i = 4; i <= 15; i++) {
+            const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+            if (checkedRadio) {
+                totalScore += parseInt(checkedRadio.value);
+            }
+        }
+
+        // ロジック判定・損失率設定
+        let lossRate = 0;
+        let statusText = "";
+        let statusClass = "";
+        let adviceText = "";
+
+        if (totalScore >= 12 && totalScore <= 20) {
+            lossRate = 0.35;
+            statusText = "【警告】即死リスク：極めて危険";
+            statusClass = "status-red";
+            adviceText = `【警告】バケツの底が完全に抜けています。このままでは3年以内に「検索市場」から消滅します。
+
+診断結果は非常に危険な状態です。御社は現在、莫大な売上を「ただ存在を知られていないだけ」「導線が切れているだけ」で、競合他社に100%奪われ続けています[cite: 1]。
+
+現代の顧客、特に「高くても良いものを買う高所得層」は、検索エンジンだけでなくChatGPTやPerplexityなどのAIを使って店や専門家を探しています[cite: 1]。そこで御社が「完全無視」されているということは、市場に存在していないのと同じです[cite: 1]。
+
+さらに、せっかくの紹介や口コミがあっても、受け皿となるマップやホームページが機能していないため、顧客は直前で逃げ出しています[cite: 1]。今すぐ広告費やSNSの投稿をすべて止め、「バケツの穴を塞ぐ（MEO・導線改善）」と「AIに認知させる（AIO）」を最優先で行ってください[cite: 1]。これ以上、大切なお金と時間をドブに捨てるのは終わりにしましょう[cite: 1]。`;
+        } else if (totalScore >= 21 && totalScore <= 29) {
+            lossRate = 0.20;
+            statusText = "【注意】はじわじわ衰退リスク：要改善";
+            statusClass = "status-yellow";
+            adviceText = `【注意】他社への「顧客流出」が止まりません。今のやり方はまもなく限界を迎えます。
+
+経営者様の努力で一定の売上は立っていますが、実は舞台裏で多くの売上をドブに捨てています[cite: 1]。原因は「やりっぱなしの広告」や「更新が途絶えたMEO・SNS」です[cite: 1]。
+
+ポータルサイトや従来のネット広告は年々コストが上がり、競合で飽和しています[cite: 1]。そこに毎月大金を払い、代理店の言う通りにしているだけでは、利益は削られる一方です[cite: 1]。
+
+最も恐ろしいのは、「競合はすでにAI検索（AIO）の仕込みを始めている」という点です[cite: 1]。今ならまだ間に合います。費用対効果の合わない広告を一度見直し、「持続性が高く、ほぼ未参入のAIO（AI検索最適化）」へ予算とリソースをシフトし、経営者としての主導権を取り戻してください[cite: 1]。`;
+        } else if (totalScore >= 30 && totalScore <= 34) {
+            lossRate = 0.08;
+            statusText = "【あと一歩】もったいないリスク：伸び代あり";
+            statusClass = "status-blue";
+            adviceText = `【あと一歩】集客の基礎はできています。だからこそ「未来のシェア」を奪われるのが一番もったいない。
+
+素晴らしい成果です。マップの運用や数値管理など、標準以上のマーケティングが行われています[cite: 1]。しかし、時代の転換点である今、「未来の売上」を逃すリスクが潜んでいます[cite: 1]。
+
+今のネット集客（SEOやネット広告）の仕組みは、AI Overviewの台頭やAI検索アプリの普及により、急激にクリック数が減少するトレンドに入っています[cite: 1]。つまり、今のやり方を「維持」しているだけでは、2〜3年後にじわじわと新規客が減っていくことになります[cite: 1]。
+
+御社に必要なのは、これまでの成功パターンにしがみつくことではなく、「今のうちにAI検索（AIO）の先行者利益を押さえておくこと」です[cite: 1]。ライバルが気づいていない今動けば、この市場のシェアを独占できます[cite: 1]。`;
+        } else {
+            lossRate = 0;
+            statusText = "【優秀】SSS級：市場独占フェーズ";
+            statusClass = "status-green";
+            adviceText = `【極めて優秀】非の打ち所がありません。これからは「業界の絶対王者」として君臨するフェーズです。
+
+機会損失はほぼゼロ、完璧なマーケティング体制です[cite: 1]。これほど数値管理と時代への適応ができている企業は全体の1%もありません[cite: 1]。
+
+今後は、御社の圧倒的な専門性と口コミ資産をさらにAI検索エンジン（ChatGPTやPerplexity等）にディープラーニングさせ[cite: 1]、「このエリア・この業種なら、AIが100%御社だけを推薦する」という圧倒的な独占状態（AIOの極大化）を作り上げてください[cite: 1]。弊社から追加で売り込むサービスはありません。ぜひ、業界の未来を引っ張るパートナーとして情報交換をさせてください。`;
+        }
+
+        // 損失金額の計算
+        const finalLossAmount = Math.floor(annualRevenue * lossRate);
+
+        // 画面の切り替え
+        document.getElementById('quiz-form').style.display = 'none';
+        const resultScreen = document.getElementById('result-screen');
+        resultScreen.style.display = 'block';
+
+        // バッジとテキストの代入
+        const badge = document.getElementById('result-status-badge');
+        badge.textContent = statusText;
+        badge.className = `result-status ${statusClass}`;
+        document.getElementById('result-text').textContent = adviceText;
+
+        // メーターの高速ジャンプアップアニメーション
+        const counterDisplay = document.getElementById('counter-display');
+        if (finalLossAmount === 0) {
+            counterDisplay.textContent = "¥0";
+            counterDisplay.classList.add('zero');
+        } else {
+            counterDisplay.classList.remove('zero');
+            let startTimestamp = null;
+            const duration = 1200; // アニメーションの時間（1.2秒）
+            
+            function step(timestamp) {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                // イージング効果（後半にかけて少し減速）
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentAmount = Math.floor(easeProgress * finalLossAmount);
+                
+                counterDisplay.textContent = "¥" + currentAmount.toLocaleString();
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+            window.requestAnimationFrame(step);
+        }
+    });
+</script>
+
+</body>
+</html>
