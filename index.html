@@ -80,10 +80,10 @@
         <div class="question-box">
             <p class="question-text">Q2. おおよその現在の年商を教えてください。</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q2" value="20000000"> 年商 2,000万円前後</label>
-                <label class="option-label"><input type="radio" name="q2" value="60000000"> 年商 6,000万円前後</label>
-                <label class="option-label"><input type="radio" name="q2" value="150000000"> 年商 1億5,000万円前後</label>
-                <label class="option-label"><input type="radio" name="q2" value="400000000"> 年商 4億円前後</label>
+                <label class="option-label"><input type="radio" name="q2" value="20000000" data-label="年商 2,000万円前後"> 年商 2,000万円前後</label>
+                <label class="option-label"><input type="radio" name="q2" value="60000000" data-label="年商 6,000万円前後"> 年商 6,000万円前後</label>
+                <label class="option-label"><input type="radio" name="q2" value="150000000" data-label="年商 1億5,000万円前後"> 年商 1億5,000万円前後</label>
+                <label class="option-label"><input type="radio" name="q2" value="400000000" data-label="年商 4億円前後"> 年商 4億円前後</label>
             </div>
         </div>
 
@@ -224,7 +224,7 @@
         <!-- BLOCK 15 -->
         <div class="block-title">■ 15. SNSアカウント運用実態</div>
         <div class="question-box">
-            <p class="question-text">Q15. Instagram、YouTube、Xなどのビジネス活用度?</p>
+            <p class="question-text">Q15. Instagram、YouTube、Xなどのビジネス活用度？</p>
             <div class="options-group">
                 <label class="option-label"><input type="radio" name="q15" value="3"> 明確なターゲット層に向けて週に複数回投稿し、直接の問い合わせや認知に繋がっている</label>
                 <label class="option-label"><input type="radio" name="q15" value="2"> アカウントはあるが投稿が不定期、または日記のような内容で集客成果は見えない</label>
@@ -321,15 +321,15 @@
 
 <script>
     // ----------------------------------------------------
-    // 🌟 Googleフォーム設定エリア（最終決定版）
+    // 🌟 Googleフォーム設定エリア（項目・データ紐付け 正しい配置に修正）
     // ----------------------------------------------------
     const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdZvokKrcOS9iYLRCz-q0cUkCp0Wj0CD7d_bPITR1zwr4mS8g/viewform";
     
     const FORM_ENTRY_IDS = {
-        industry: "entry.201927919",      // 1番目の質問（業種）
-        optimalCost: "entry.695293951",   // 2番目の質問（適正広告費目安）
-        lossAmount: "entry.978904273",    // 3番目の質問（売上機会損失額）
-        adviceText: "entry.1935444876"    // 4番目の質問（診断アドバイス）
+        name: "entry.201927919",          // 「ご氏名」の枠（自動入力せず空白）
+        email: "entry.695293951",         // 「メールアドレス」の枠（自動入力せず空白）
+        industry: "entry.978904273",      // 👈「業種」の枠に、選択された【業種データ】を入れます
+        revenue: "entry.1935444876"       // 👈「年商」の枠に、選択された【年商データ】と【診断結果】をまとめて入れます
     };
     // ----------------------------------------------------
 
@@ -357,7 +357,10 @@
 
         try {
             const industry = document.querySelector('input[name="q1"]:checked').value;
-            const revenue = parseInt(document.querySelector('input[name="q2"]:checked').value);
+            const revenueRadio = document.querySelector('input[name="q2"]:checked');
+            const revenueValue = parseInt(revenueRadio.value);
+            const revenueLabel = revenueRadio.closest('label').textContent.trim(); // 「年商 2,000万円前後」などのテキスト
+            
             const currentMonthlyCost = parseInt(document.querySelector('input[name="q3"]:checked').value);
             const currentAnnualCost = currentMonthlyCost * 12;
 
@@ -380,7 +383,7 @@
             if(industry.includes('防カビ')) optimalRate = 0.20;
             if(industry.includes('一般法人')) optimalRate = 0.04;
 
-            const optimalAnnualCost = Math.floor(revenue * optimalRate);
+            const optimalAnnualCost = Math.floor(revenueValue * optimalRate);
 
             // 2. 総合点に基づく損失率・リスク評価
             let baseLossRate = 0;
@@ -401,18 +404,18 @@
                 statusClass = "status-blue";
             }
 
-            // 精密加算補正（紙媒体・リアル店舗・紹介漏れのペナルティ追加）
+            // 精密加算補正
             if(vals.q4 === 1 && (industry.includes('不動産') || industry.includes('飲食店') || industry.includes('美容室'))) {
-                baseLossRate += 0.05; // アナログ地域密着業種で紙媒体を未着手、またはリスク
+                baseLossRate += 0.05;
             }
             if(vals.q6 === 1) {
-                baseLossRate += 0.06; // 紹介が運頼み・仕組み化されていない損失
+                baseLossRate += 0.06;
             }
             if(vals.q7 === 1 && currentAnnualCost > 0) {
-                baseLossRate += 0.04; // スマホ受け皿崩壊
+                baseLossRate += 0.04;
             }
             if(vals.q18 === 1) {
-                baseLossRate += 0.05; // 初動・成約率管理が不十分なことによる営業流出
+                baseLossRate += 0.05;
             }
 
             // 投資を多く行っているのにスコアが悪い場合の損失加算
@@ -423,9 +426,9 @@
             }
 
             // 最終売上機会損失額
-            let finalLossAmount = Math.floor(revenue * baseLossRate) + investmentRiskCost;
-            if(finalLossAmount > revenue) {
-                finalLossAmount = Math.floor(revenue * 0.45);
+            let finalLossAmount = Math.floor(revenueValue * baseLossRate) + investmentRiskCost;
+            if(finalLossAmount > revenueValue) {
+                finalLossAmount = Math.floor(revenueValue * 0.45);
             }
 
             // 3. アドバイス文生成
@@ -433,7 +436,7 @@
 
             if(industry.includes('防カビ')) {
                 if(vals.q8 === 1 || vals.q18 === 1) {
-                    advice = `【精密分析結果：緊急解決型ビジネス】\n緊急解決型ビジネスの勝負は、有料オンライン広告（Q8）と「初動対応スピード（Q18）」の2軸でほぼ決定します。\n現在、この連動ブロックが機能していないため、年間想定 ${finalLossAmount.toLocaleString()}円の致命的な売上機会損失が生じています。この業種では紙媒体やSNSに投資を分散すべきではありません。今すぐ「1時間以内の即応インフラ」と「リスティング広告のCPA管理」に全リソースを投入してください。`;
+                    advice = `【精密分析結果：緊急解決型ビジネス】\n緊急解決型ビジネスの勝負は、有料オンライン広告（Q8）と「初動対応スピード（Q18）」の2軸でほぼ決定します。\n現在、この連動ブロックが機能していないため、年間想定 ${finalLossAmount.toLocaleString()}円の致命的な売上機会損失が生じています。この業種では紙媒体やSNSに投資を分散すべきではありません。今すぐ「1時間い内の即応インフラ」と「リスティング広告のCPA管理」に全リソースを投入してください。`;
                 } else {
                     advice = `【精密分析結果：緊急解決型ビジネス】\n有料広告およびリアル即応体制は非常に高い水準です。クリック単価の高騰リスクに備え、今後は「Q13・Q14：次世代AI検索（AIO）」への知見テキスト仕込みを進め、コストのかからない次世代デジタルインフラの構築を進めてください。`;
                 }
@@ -452,20 +455,22 @@
                     advice = `【精密分析結果：高単価・信頼検討型ビジネス】\n現在のリアルな紹介やビジネス基盤は機能していますが、「Q13・Q14：次世代AI検索適応度」に深刻な未来リスクが検出されました。BtoBや高単価商材を調べる層は、従来のSEOからChatGPT等のAI検索へ急激に移行しています。このブロックを放置すると、2〜3年以内に集客が枯渇する恐れがあります。今すぐWEBサイトへ「専門テキスト資産（Q14）」を公開し、先行者利益を獲得してください。`;
                 }
             }
-// 🌟 Googleフォーム設定エリア（ズレ修正完了版）
-// ----------------------------------------------------
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdZvokKrcOS9iYLRCz-q0cUkCp0Wj0CD7d_bPITR1zwr4mS8g/viewform";
 
-const FORM_ENTRY_IDS = {
-    industry: "entry.1935444876",      // 「業種」の欄に「売上機会損失額」を入れる
-    optimalCost: "entry.695293951",   // 「メールアドレス」の欄に「適正広告費目安」を入れる
-    lossAmount: "entry.201927919",    // 「ご氏名」の欄に「業種」を入れる
-    adviceText: "entry.978904273"     // 「年商」の欄に「診断アドバイス」を入れる
+            // 🌟 Googleフォーム自動引き継ぎ用のテキスト構築
+            const optimalCostStr = "¥" + optimalAnnualCost.toLocaleString();
+            const lossAmountStr = "¥" + finalLossAmount.toLocaleString();
+            
+            // 年商欄に、選択された年商テキストと、裏側で算出された診断結果一式をすべて見やすく結合して流し込みます
+            const combinedRevenueAndResults = `${revenueLabel}\n\n------------------------------\n【システム自動査定結果】\n・適正な年間広告集客費の目安: ${optimalCostStr}\n・現状の年間売上機会損失額: ${lossAmountStr}\n------------------------------\n\n${advice}`;
 
-            // ボタンへリンクを反映
+            const formLinkUrl = GOOGLE_FORM_URL + "?" + 
+                FORM_ENTRY_IDS.industry + "=" + encodeURIComponent(industry) + 
+                "&" + FORM_ENTRY_IDS.revenue + "=" + encodeURIComponent(combinedRevenueAndResults);
+
+            // フォーム誘導ボタンへリンクをセット
             document.getElementById('go-to-form-btn').href = formLinkUrl;
 
-            // 4. 表示の切り替え
+            // 4. 画面表示の切り替え
             document.getElementById('assessment-form').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
 
@@ -474,14 +479,14 @@ const FORM_ENTRY_IDS = {
             badge.className = "result-status " + statusClass;
             document.getElementById('advice-content').textContent = advice;
 
-            // アニメーション実行
+            // カウンターアニメーション実行
             animateValue('optimal-cost-display', 0, optimalAnnualCost, 1000);
             animateValue('loss-display', 0, finalLossAmount, 1200);
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
         } catch (err) {
-            alert("システムエラーが発生しました。ブラウザを再読み込みしてもう一度お試しください。");
+            alert("システムエラーが発生しました。お手数ですが再読み込みしてもう一度お試しください。");
             console.error(err);
         }
     });
