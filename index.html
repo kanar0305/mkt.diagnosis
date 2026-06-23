@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI時代：客観的データに基づく集客投資・健康診断</title>
+    <title>AI時代：客観的データに基づく集客投資・20軸総合精密診断</title>
     <style>
         :root {
             --primary-color: #1a2a40;
@@ -20,7 +20,7 @@
         h1 { font-size: 20px; color: var(--primary-color); text-align: center; margin-bottom: 8px; letter-spacing: -0.5px; }
         .subtitle { font-size: 13px; color: #718096; text-align: center; margin-bottom: 30px; }
         .block-title { font-size: 14px; font-weight: bold; color: var(--primary-color); background: #edf2f7; padding: 6px 12px; border-radius: 4px; margin: 35px 0 15px 0; }
-        .question-box { margin-bottom: 24px; }
+        .question-box { margin-bottom: 10px; }
         .question-text { font-weight: bold; font-size: 13.5px; margin-bottom: 10px; color: #1a202c; }
         .options-group { display: flex; flex-direction: column; gap: 8px; }
         .option-label { display: block; padding: 12px 14px; background: #fff; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer; font-size: 12.5px; transition: all 0.2s; }
@@ -37,7 +37,6 @@
         .status-yellow { background: #fffaf0; color: #dd6b20; border: 1px solid #feebc8; }
         .status-blue { background: #f7fafc; color: #2b6cb0; border: 1px solid #e2e8f0; }
         
-        /* 横並びカードのレイアウトバグを修正 */
         .grid-box { display: flex; gap: 15px; margin-bottom: 25px; }
         .metrics-card { flex: 1; background: #1a202c; color: #fff; padding: 20px; border-radius: 6px; text-align: center; }
         
@@ -56,15 +55,16 @@
 <body>
 
 <div class="container">
-    <form id="assessment-form">
-        <h1>集客投資効率＆市場適応度 客観診断査定</h1>
-        <p class="subtitle">各マーケティング手法のデータに基づき、現状の投資バランスと機会損失を査定します。</p>
+    <form id="assessment-form" novalidate>
+        <h1>集客投資効率＆市場適応度 客観20軸精密査定</h1>
+        <p class="subtitle">20の独立したマーケティング評価軸に基づき、現状の投資バランスと売上機会損失額を算出します。</p>
 
-        <div class="block-title">■ 現在の事業ステータス</div>
+        <!-- BLOCK 1 -->
+        <div class="block-title">■ 01. 業種セグメント分類</div>
         <div class="question-box">
-            <p class="question-text">Q1. 御社の該当する業種セグメントはどれですか？</p>
+            <p class="question-text">Q1. 御社の該当する主要ビジネスモデルはどれですか？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q1" value="lawyer" required> 士業・コンサル・各種専門職（BtoB信頼型）</label>
+                <label class="option-label"><input type="radio" name="q1" value="lawyer"> 士業・コンサル・各種専門職（BtoB信頼型）</label>
                 <label class="option-label"><input type="radio" name="q1" value="realestate"> 不動産売買仲介・建築・リフォーム（高単価検討型）</label>
                 <label class="option-label"><input type="radio" name="q1" value="restaurant"> 飲食店・BAR・地域密着型実店舗（日常利用型）</label>
                 <label class="option-label"><input type="radio" name="q1" value="salon"> 美容室・エステ・治療院（リピート目的型）</label>
@@ -73,20 +73,24 @@
             </div>
         </div>
 
+        <!-- BLOCK 2 -->
+        <div class="block-title">■ 02. 現在の年間売上規模</div>
         <div class="question-box">
-            <p class="question-text">Q2. おおよその現在の年商（売上規模）を教えてください。</p>
+            <p class="question-text">Q2. おおよその現在の年商を教えてください。</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q2" value="20000000" required> 年商 2,000万円前後</label>
+                <label class="option-label"><input type="radio" name="q2" value="20000000"> 年商 2,000万円前後</label>
                 <label class="option-label"><input type="radio" name="q2" value="60000000"> 年商 6,000万円前後</label>
                 <label class="option-label"><input type="radio" name="q2" value="150000000"> 年商 1億5,000万円前後</label>
                 <label class="option-label"><input type="radio" name="q2" value="400000000"> 年商 4億円前後</label>
             </div>
         </div>
 
+        <!-- BLOCK 3 -->
+        <div class="block-title">■ 03. 月次の集客投資コスト</div>
         <div class="question-box">
-            <p class="question-text">Q3. 現在、集客にかける「月次コスト」の総額はどのくらいですか？</p>
+            <p class="question-text">Q3. 現在、集客にかける月次コスト（広告費・掲載料・委託費の総額）は？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q3" value="0" required> ほぼ投資していない（紹介・人脈メイン）</label>
+                <label class="option-label"><input type="radio" name="q3" value="0"> ほぼ投資していない（紹介・人脈メイン）</label>
                 <label class="option-label"><input type="radio" name="q3" value="50000"> 月5万円未満</label>
                 <label class="option-label"><input type="radio" name="q3" value="200000"> 月10万〜30万円</label>
                 <label class="option-label"><input type="radio" name="q3" value="600000"> 月30万〜100万円</label>
@@ -94,86 +98,206 @@
             </div>
         </div>
 
-        <div class="block-title">■ デジタル顧客接点の品質チェック</div>
+        <!-- BLOCK 4 -->
+        <div class="block-title">■ 04. モバイル導線最適化（UI/UX）</div>
         <div class="question-box">
-            <p class="question-text">Q4. 有料広告（リスティング広告・Meta広告等）の費用対効果（CPA）の管理状況は？</p>
+            <p class="question-text">Q4. 自社ホームページやLPのスマートフォンにおける「問い合わせやすさ」は？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q4" value="3" required> 1人あたりの獲得単価を把握し、投資対効果が黒字化している</label>
-                <label class="option-label"><input type="radio" name="q4" value="2"> 出稿しているが代理店丸投げ状態、または成果が出ているか不明瞭</label>
-                <label class="option-label"><input type="radio" name="q4" value="1"> 実施していない、もしくは過去にコスト倒れで失敗したトラウマがある</label>
+                <label class="option-label"><input type="radio" name="q4" value="3"> 完全最適化され、LINEや電話、フォームへ1タップで迷わず直感的に繋がる</label>
+                <label class="option-label"><input type="radio" name="q4" value="2"> 表示はされるが、文字が小さい・フォーム項目が多く途中で離脱されている懸念がある</label>
+                <label class="option-label"><input type="radio" name="q4" value="1"> サイトがない、または何年も放置されスマホで見づらい</label>
             </div>
         </div>
 
+        <!-- BLOCK 5 -->
+        <div class="block-title">■ 05. 有料オンライン広告の費用対効果（CPA）</div>
         <div class="question-box">
-            <p class="question-text">Q5. Googleマップ（MEO）および業界向けポータルサイトの運用実態は？</p>
+            <p class="question-text">Q5. リスティング広告やMeta広告等の成果管理状況は？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q5" value="3" required> 直近1ヶ月以内にも口コミが蓄積され、すべての評価に返信対応をしている</label>
-                <label class="option-label"><input type="radio" name="q5" value="2"> 情報掲載はしているが、数ヶ月以上更新が止まっている、または返信していない</label>
-                <label class="option-label"><input type="radio" name="q5" value="1"> アカウントが未整備、あるいはポータルの掲載費高騰に悩まされている</label>
+                <label class="option-label"><input type="radio" name="q5" value="3"> 1顧客獲得あたりのコスト（CPA）を把握し、投資対効果が明確に黒字化している</label>
+                <label class="option-label"><input type="radio" name="q5" value="2"> 出稿しているが、代理店丸投げでCPAを把握しておらず、成果が良いか不明瞭</label>
+                <label class="option-label"><input type="radio" name="q5" value="1"> 広告を行っていない、または過去に実施したがコスト倒れで失敗した</label>
             </div>
         </div>
 
+        <!-- BLOCK 6 -->
+        <div class="block-title">■ 06. 広告クリエイティブ・情報の鮮度</div>
         <div class="question-box">
-            <p class="question-text">Q6. ホームページ（HP）における、スマートフォンユーザーの「問い合わせ導線」は？</p>
+            <p class="question-text">Q6. ネット上の広告文や掲載している実績情報の更新頻度は？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q6" value="3" required> スマホ最適化がされており、LINEやフォームへ1クリックで直感的に繋がる</label>
-                <label class="option-label"><input type="radio" name="q6" value="2"> 表示はされるが、古いメールフォームや電話番号のみで入力ハードルが高い</label>
-                <label class="option-label"><input type="radio" name="q6" value="1"> サイトがない、または何年も更新されておらず企業の信頼感を損ねている</label>
+                <label class="option-label"><input type="radio" name="q6" value="3"> 季節や市場の変化に合わせ、ここ1〜2ヶ月以内にも新しい素材や数値に変更した</label>
+                <label class="option-label"><input type="radio" name="q6" value="2"> 半年以上、同じ広告文や古いサービス情報のまま出し続けている</label>
+                <label class="option-label"><input type="radio" name="q6" value="1"> 該当なし（広告出稿や情報の定期更新を全く行っていない）</label>
             </div>
         </div>
 
-        <div class="block-title">■ 次世代インフラおよび自然検索への適応度</div>
+        <!-- BLOCK 7 -->
+        <div class="block-title">■ 07. ローカル検索（MEO）と口コミ運用</div>
         <div class="question-box">
-            <p class="question-text">Q7. ChatGPT、Gemini、Perplexity等のAI検索エンジンにおける自社の露出は？</p>
+            <p class="question-text">Q7. Googleマップにおける「口コミの蓄積」と「返信対応」の実態は？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q7" value="3" required> 「地域＋業種」で検証した際、AIからおすすめの1社として明確に推薦される</label>
-                <label class="option-label"><input type="radio" name="q7" value="2"> AI検索を使ったことがない、または自社がどう評価されているか知らない</label>
-                <label class="option-label"><input type="radio" name="q7" value="1"> 競合他社のみが推薦され、自社の存在や強みが完全に無視されている</label>
+                <label class="option-label"><input type="radio" name="q7" value="3"> 直近1ヶ月以内にも新規口コミが増えており、すべての評価に返信対応をしている</label>
+                <label class="option-label"><input type="radio" name="q7" value="2"> アカウントはあるが、口コミが数ヶ月以上増えていない、または返信をサボっている</label>
+                <label class="option-label"><input type="radio" name="q7" value="1"> マップ登録自体が未整備、あるいは実店舗ビジネスではない</label>
             </div>
         </div>
 
+        <!-- BLOCK 8 -->
+        <div class="block-title">■ 08. 業界向けポータルサイト依存度</div>
         <div class="question-box">
-            <p class="question-text">Q8. Google等の従来の自然検索（SEO）における現状の手応えは？</p>
+            <p class="question-text">Q8. 外部ポータルサイト（ホットペッパー、各種比較サイト等）への依存レベルは？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q8" value="3" required> 狙ったお宝キーワードで1ページ目に表示され、安定した自然流入がある</label>
-                <label class="option-label"><input type="radio" name="q8" value="2"> 以前よりアクセスが減少傾向、または社名・店名でしか引っかからない</label>
-                <label class="option-label"><input type="radio" name="q8" value="1"> 検索順位を全く意識していない、または対策のしようがわからない</label>
+                <label class="option-label"><input type="radio" name="q8" value="3"> 自社チャネル（HP/SNS）でも安定集客でき、ポータルの掲載費に依存しすぎていない</label>
+                <label class="option-label"><input type="radio" name="q8" value="2"> ポータル頼みになっており、掲載費の高騰やプラン変更に振り回されて悩んでいる</label>
+                <label class="option-label"><input type="radio" name="q8" value="1"> ポータルには非掲載、または費用対効果が合わず完全撤退した</label>
             </div>
         </div>
 
-        <div class="block-title">■ 既存資産・関係性のシステム化</div>
+        <!-- BLOCK 9 -->
+        <div class="block-title">■ 09. 自然検索キーワード支配率（SEO）</div>
         <div class="question-box">
-            <p class="question-text">Q9. 公式LINE、メルマガ、または既存顧客リストの追客体制は？</p>
+            <p class="question-text">Q9. Google等の検索エンジンで、購買に繋がる重要キーワードの検索順位は？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q9" value="3" required> 定期的に有益な情報を提供し、リピートや休眠掘り起こしが仕組み化されている</label>
-                <label class="option-label"><input type="radio" name="q9" value="2"> リストはあるが、単発の告知やセール時のみしか配信ができていない</label>
-                <label class="option-label"><input type="radio" name="q9" value="1"> 過去の顧客リストは眠ったまま、次回のアプローチは顧客の自発的連絡待ち</label>
+                <label class="option-label"><input type="radio" name="q9" value="3"> 「地域名＋業種」や重要な購買キーワードで検索1ページ目に複数定着している</label>
+                <label class="option-label"><input type="radio" name="q9" value="2"> 社名や店名でしか引っかからない、または以前よりアクセスが落ちている</label>
+                <label class="option-label"><input type="radio" name="q9" value="1"> 検索順位の対策（SEO）を意識したことがない・やり方がわからない</label>
             </div>
         </div>
 
+        <!-- BLOCK 10 -->
+        <div class="block-title">■ 10. 次世代AI検索露出度（LLM対応）</div>
         <div class="question-box">
-            <p class="question-text">Q10. 紹介・口コミ（BNI等のネットワーク活用含む）の再現性は？</p>
+            <p class="question-text">Q10. ChatGPTやGemini等で自社エリアのサービスを尋ねた際の露出は？</p>
             <div class="options-group">
-                <label class="option-label"><input type="radio" name="q10" value="3" required> 紹介が発生するインセンティブや定期的なギブの仕組みがルーティン化している</label>
-                <label class="option-label"><input type="radio" name="q10" value="2"> 紹介は時々起きるが、100%「経営者個人の人脈や運」に依存しており波がある</label>
-                <label class="option-label"><input type="radio" name="q10" value="1"> 紹介が自発的に生まれるルートが現在ほぼ存在しない</label>
+                <label class="option-label"><input type="radio" name="q10" value="3"> おすすめの会社・店舗として自社の名前や強みが正確に推薦・紹介される</label>
+                <label class="option-label"><input type="radio" name="q10" value="2"> AI検索で自社がどう表示されるか調べたことがない、または認知されていない</label>
+                <label class="option-label"><input type="radio" name="q10" value="1"> 競合他社の名前ばかりが挙がり、自社の存在が完全に無視されている</label>
             </div>
         </div>
 
-        <button type="submit" class="submit-btn">客観的データを分析し、査定結果を見る</button>
+        <!-- BLOCK 11 -->
+        <div class="block-title">■ 11. 専門テキスト資産の蓄積</div>
+        <div class="question-box">
+            <p class="question-text">Q11. AIに学習されやすい「テキストデータ」をネット上に公開していますか？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q11" value="3"> 独自の専門知識や事例、お客様の具体的な声をテキスト形式で定期公開している</label>
+                <label class="option-label"><input type="radio" name="q11" value="2"> WEBサイトはあるが画像中心、または数年前から解説テキストの更新が止まっている</label>
+                <label class="option-label"><input type="radio" name="q11" value="1"> ネット上に自社の詳しい強みや解説テキストがほとんど存在しない</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 12 -->
+        <div class="block-title">■ 12. SNSアカウント運用実態</div>
+        <div class="question-box">
+            <p class="question-text">Q12. Instagram、YouTube、Xなどのビジネス活用度は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q12" value="3"> 明確なターゲット層に向けて週に複数回投稿し、直接の問い合わせや認知に繋がっている</label>
+                <label class="option-label"><input type="radio" name="q12" value="2"> アカウントはあるが投稿が不定期、または日記のような内容で集客成果は見えない</label>
+                <label class="option-label"><input type="radio" name="q12" value="1"> SNSの運用は行っていない、またはビジネスに向いていないため放置している</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 13 -->
+        <div class="block-title">■ 13. ビジュアル・クリエイティブの鮮度</div>
+        <div class="question-box">
+            <p class="question-text">Q13. 視覚的にユーザーを引きつける「動画や画像素材」のクオリティは？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q13" value="3"> トレンドを取り入れた動画や高画質な写真を使い、ユーザーの反応を獲得している</label>
+                <label class="option-label"><input type="radio" name="q13" value="2"> 数年前に作った紹介動画や、画質の粗いスタッフの写真を使い回している</label>
+                <label class="option-label"><input type="radio" name="q13" value="1"> 該当なし（動画や画像の集客活用を現在行っていない）</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 14 -->
+        <div class="block-title">■ 14. 既存・休眠顧客リストの一元管理</div>
+        <div class="question-box">
+            <p class="question-text">Q14. 過去の顧客、問い合わせユーザーの「連絡先リスト」の管理状態は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q14" value="3"> CRM（顧客管理システム）や公式LINE等に一元化され、いつでもセグメント配信ができる</label>
+                <label class="option-label"><input type="radio" name="q14" value="2"> 名刺や紙のカルテ、バラバラのエクセルファイルに眠っており、活用しきれていない</label>
+                <label class="option-label"><input type="radio" name="q14" value="1"> 顧客リストを収集していない、または過去のやり取りを記録していない</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 15 -->
+        <div class="block-title">■ 15. 公式LINE・メルマガの追客仕組み化</div>
+        <div class="question-box">
+            <p class="question-text">Q15. リストに対する定期的、または自動（ステップ）配信の運用体制は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q15" value="3"> 登録者に有益な情報やキャンペーンが定期配信され、自動的にリピートへ繋がっている</label>
+                <label class="option-label"><input type="radio" name="q15" value="2"> アカウントはあるが、新年の挨拶や単発の強引な売り込み・告知時しか配信していない</label>
+                <label class="option-label"><input type="radio" name="q15" value="1"> 定期的なメッセージ配信の仕組みは一切やっていない</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 16 -->
+        <div class="block-title">■ 16. 紹介・口コミ発生の再現性</div>
+        <div class="question-box">
+            <p class="question-text">Q16. 既存顧客やビジネスネットワークからの紹介ルートのシステム化は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q16" value="3"> 紹介が発生するインセンティブや、定期的なギブの仕組みが完全にルール化している</label>
+                <label class="option-label"><input type="radio" name="q16" value="2"> 紹介はたまに起きるが、100%経営者個人の人脈や運頼みであり、コントロールできない</label>
+                <label class="option-label"><input type="radio" name="q16" value="1"> 紹介が自発的に生まれるルートや組織的なつながりが現在ほぼ存在しない</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 17 -->
+        <div class="block-title">■ 17. 地域密着アナログ投資の計測</div>
+        <div class="question-box">
+            <p class="question-text">Q17. チラシ、看板、フリーペーパーなど「リアル媒体」の費用対効果は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q17" value="3"> 配布エリアをデータで絞り、QRコード等でWEBへ繋ぐなど費用対効果が測定できている</label>
+                <label class="option-label"><input type="radio" name="q17" value="2"> 惰性で地元の情報誌や看板にお金を払っているが、そこからの成約数は不明瞭</label>
+                <label class="option-label"><input type="radio" name="q17" value="1"> アナログな集客投資は行っていない、または完全にWEB一本に絞っている</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 18 -->
+        <div class="block-title">■ 18. 初動対応スピードと成約率管理</div>
+        <div class="question-box">
+            <p class="question-text">Q18. 問い合わせが入った後の対応スピードとデータ集計は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q18" value="3"> 原則1時間以内に即応し、問い合わせからの成約率をデータ化して改善している</label>
+                <label class="option-label"><input type="radio" name="q18" value="2"> 対応が翌日以降になることが多く、成約率も営業担当者の感覚値でしか把握していない</label>
+                <label class="option-label"><input type="radio" name="q18" value="1"> 対応ルールが特に決まっておらず、成約率の集計も行っていない</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 19 -->
+        <div class="block-title">■ 19. LTV（顧客生涯価値）最大化設計</div>
+        <div class="question-box">
+            <p class="question-text">Q19. 顧客1人あたりのリピート回数や高単価プランへの誘導設計は？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q19" value="3"> 初回利用後のリピート誘導や、上位プラン・顧問契約を提案する導線が整っている</label>
+                <label class="option-label"><input type="radio" name="q19" value="2"> 単発の利用で終わることが多く、2回目以降の購入を促すための商品設計が弱い</label>
+                <label class="option-label"><input type="radio" name="q19" value="1"> 完全に一発売切りのビジネスモデルであり、複数回買われる仕組みはない</label>
+            </div>
+        </div>
+
+        <!-- BLOCK 20 -->
+        <div class="block-title">■ 20. 経営データダッシュボードの有無</div>
+        <div class="question-box">
+            <p class="question-text">Q20. 各集客施策の「投資対効果」を経営陣が数字ベースで毎月判断していますか？</p>
+            <div class="options-group">
+                <label class="option-label"><input type="radio" name="q20" value="3"> 「投資額、CPA、LTV、売上」をまとめたレポートに基づき、毎月科学的に判断している</label>
+                <label class="option-label"><input type="radio" name="q20" value="2"> 売上は見るが、どの集客施策にいくら使って、いくら戻ってきたかは感覚で判断している</label>
+                <label class="option-label"><input type="radio" name="q20" value="1"> 集客データの集計をしておらず、どんぶり勘定で通帳を見ながら投資を決めている</label>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">客観的データを精密分析し、査定結果を見る</button>
     </form>
 
     <!-- 診断結果表示 -->
     <div id="result-screen">
         <div class="result-header">
-            <h1 style="margin-bottom: 10px;">集客構造分析レポート</h1>
+            <h1 style="margin-bottom: 10px;">集客構造・20軸精密分析レポート</h1>
             <div id="result-badge" class="result-status"></div>
         </div>
 
-        <!-- 修正したコンテナレイアウト -->
         <div class="grid-box">
             <div class="metrics-card">
-                <div class="metrics-label">適正な年間広告費の目安</div>
+                <div class="metrics-label">適正な年間広告集客費の目安</div>
                 <div id="optimal-cost-display" class="metrics-value cost-color">¥0</div>
             </div>
             <div class="metrics-card">
@@ -189,7 +313,7 @@
 </div>
 
 <script>
-    // ラジオボタンの選択UI挙動
+    // ラジオボタンの選択UI挙ブループ
     document.querySelectorAll('.options-group').forEach(group => {
         group.addEventListener('change', (e) => {
             group.querySelectorAll('.option-label').forEach(label => label.classList.remove('selected'));
@@ -200,110 +324,134 @@
     document.getElementById('assessment-form').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const industry = document.querySelector('input[name="q1"]:checked').value;
-        const revenue = parseInt(document.querySelector('input[name="q2"]:checked').value);
-        const currentMonthlyCost = parseInt(document.querySelector('input[name="q3"]:checked').value);
-        const currentAnnualCost = currentMonthlyCost * 12;
-
-        // 基礎点集計 (Q4〜Q10: 計7問, 7点〜21点)
-        let score = 0;
-        let q4 = 0, q5 = 0, q6 = 0, q7 = 0;
-        
-        q4 = parseInt(document.querySelector('input[name="q4"]:checked').value);
-        q5 = parseInt(document.querySelector('input[name="q5"]:checked').value);
-        q6 = parseInt(document.querySelector('input[name="q6"]:checked').value);
-        q7 = parseInt(document.querySelector('input[name="q7"]:checked').value);
-        
-        score = q4 + q5 + q6 + q7 + 
-                parseInt(document.querySelector('input[name="q9"]:checked').value) + 
-                parseInt(document.querySelector('input[name="q10"]:checked').value) +
-                parseInt(document.querySelector('input[name="q8"]:checked').value);
-
-        // 1. 業種別の適正コスト計算（パーセンテージ）
-        let optimalRate = 0.07;
-        if(industry === 'lawyer') optimalRate = 0.06;
-        if(industry === 'realestate') optimalRate = 0.10;
-        if(industry === 'restaurant') optimalRate = 0.05;
-        if(industry === 'salon') optimalRate = 0.08;
-        if(industry === 'emergency') optimalRate = 0.20;
-        if(industry === 'btob') optimalRate = 0.04;
-
-        const optimalAnnualCost = Math.floor(revenue * optimalRate);
-
-        // 2. データに基づく損失率・リスク評価ロジックの判定
-        let baseLossRate = 0;
-        let statusText = "";
-        let statusClass = "";
-        let advice = "";
-
-        if (score <= 11) {
-            baseLossRate = 0.28;
-            statusText = "【重度】投資効率ミスマッチ・集客構造崩壊リスク";
-            statusClass = "status-red";
-        } else if (score <= 17) {
-            baseLossRate = 0.15;
-            statusText = "【中等度】機会損失・過渡期インフラ未適応状態";
-            statusClass = "status-yellow";
-        } else {
-            baseLossRate = 0.03;
-            statusText = "【健全】集客資産化・継続最適化フェーズ";
-            statusClass = "status-blue";
-        }
-
-        // データの「特徴・注意点」に基づく加算・減算補正[cite: 1]
-        if((q6 === 1 || q5 === 1) && currentAnnualCost > 0) {
-            baseLossRate += 0.05;
-        }
-        if(q7 === 1 && (industry === 'lawyer' || industry === 'emergency' || industry === 'restaurant')) {
-            baseLossRate += 0.04;
-        }
-
-        const finalLossAmount = Math.floor(revenue * baseLossRate);
-
-        // 3. 業種×現状データに基づいた「参謀アドバイス」の生成
-        if(industry === 'emergency') {
-            if(q4 === 1) {
-                advice = `【分析結果】
-御社のような「緊急解決型」ビジネスにおいて、顧客は比較検討をせず「今すぐ」解決できる手段を探します。他施策のデータが示す通り、ネット広告の「即効性」は最強ですが、クリック単価が激化しています[cite: 1]。現在、有料広告のCPA管理や運用ができていない点は致命的な機会損失です[cite: 1]。SNSを優先する必要はありません。まずは無駄な広告コストの全数査定と、スマホでの問い合わせ導線の再整備を最優先してください[cite: 1]。`;
-            } else {
-                advice = `【分析結果】
-有料広告（リスティング）は機能していると考えられますが、止めると即時に顧客が消えるリスクを抱えています[cite: 1]。競合が飽和しクリック単価が年々上昇する中、第二の柱として「持続性」の高いAI検索（AIO）への情報仕込みを開始し、広告依存度を長期的に引き下げる投資分散の経営判断をおすすめします[cite: 1]。`;
-            }
-        } 
-        else if(industry === 'restaurant' || industry === 'salon') {
-            if(q5 === 1 || q5 === 2) {
-                advice = `【分析結果】
-店舗ビジネスにおける最重要チャネルは「Googleマップ（MEO）」と「主要ポータル」の適正運用です[cite: 1]。データが示す通り、実店舗のMEOは費用対効果が非常に高く持続性もあります[cite: 1]。ここ数ヶ月口コミへの返信や更新が止まっていることによる離倒は、年間で約 ${finalLossAmount.toLocaleString()} 円の機会損失を自ら生み出している状態です[cite: 1]。最優先すべきは、新しい対策を買い足すことではなく、既存顧客へ口コミを促し、100%誠実な返信を返す仕組みを作ることです[cite: 1]。`;
-            } else {
-                advice = `【分析結果】
-足元のMEOや店舗接点は非常に優秀です[cite: 1]。ポータルサイトの掲載費高騰やプラットフォーム依存リスクに備え、今後は「リピート追客（LINE等）」の徹底システム化、および利用者が急増しているAI検索（AIO）経由の先進顧客を囲い込むフェーズに移行すべきです[cite: 1]。`;
-            }
-        }
-        else if(industry === 'lawyer' || industry === 'realestate' || industry === 'btob') {
-            if(q6 === 1 || q10 === 1) {
-                advice = `【分析結果】
-信頼検討型のビジネスでは、「紹介・口コミ」および「ホームページの専門性・安心感」が成約率の生命線です[cite: 1]。現在、紹介が経営者の人脈・運頼みになっており、受け皿となるWEBサイトの問い合わせ導線が弱い場合、せっかく発生した認知が最後の1クリックの手前で他社へ流出しています[cite: 1]。まずはSNSの運用工数を一度ストップし[cite: 1]、紹介ルートの明確なシステム化と、スマホサイトの導線修正にリソースを集中させてください[cite: 1]。`;
-            } else if(q7 === 1 || q7 === 2) {
-                advice = `【分析結果】
-集客基盤や紹介システムは機能していますが、大きな「未来リスク」が潜んでいます。士業や高単価商材を調べる先進層・ビジネス層は、すでに従来の検索からChatGPTやGemini等の「AI検索」へ移行を始めています[cite: 1]。市場分析データの通り、従来のSEOはAI Overviewの台頭によりクリック数が減少トレンドにあります[cite: 1]。今すぐ「AIに正しく評価され、推薦される土台（AIO）」を仕込むことで、競合がまだほぼ未参入の先行者利益を独占する経営判断が最も有効です[cite: 1]。`;
-            } else {
-                advice = `【分析結果】
-非常に優れたマーケティングバランスを維持されています[cite: 1]。特定の広告代理店や手法に依存せず、客観的なデータを追えている状態です。今後は現在の資産を維持しつつ、各種インフラの変化（AI検索最適化）を定期的にモニタリングし、トップランナーとしてのポジションを守る防衛策をとりましょう[cite: 1]。`;
+        // 完全に20の大ブロックに対する入力漏れをバリデーション
+        const totalQuestions = 20;
+        for (let i = 1; i <= totalQuestions; i++) {
+            const checkedTarget = document.querySelector(`input[name="q${i}"]:checked`);
+            if (!checkedTarget) {
+                alert(`【入力漏れ】■ ${String(i).padStart(2, '0')} のブロックがまだ選択されていません。スクロールしてご回答をお願いします。`);
+                document.querySelector(`input[name="q${i}"]`).closest('.block-title, .question-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
             }
         }
 
-        // 4. 表示の切り替えとメーターアニメーション
-        document.getElementById('assessment-form').style.display = 'none';
-        document.getElementById('result-screen').style.display = 'block';
+        try {
+            const industry = document.querySelector('input[name="q1"]:checked').value;
+            const revenue = parseInt(document.querySelector('input[name="q2"]:checked').value);
+            const currentMonthlyCost = parseInt(document.querySelector('input[name="q3"]:checked').value);
+            const currentAnnualCost = currentMonthlyCost * 12;
 
-        const badge = document.getElementById('result-badge');
-        badge.textContent = statusText;
-        badge.className = `result-status ${statusClass}`;
-        document.getElementById('advice-content').textContent = advice;
+            // Q4〜Q20の値を取得
+            const vals = {};
+            for(let i=4; i<=20; i++) {
+                vals[`q${i}`] = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+            }
+            
+            // 基礎点集計 (17問×最大3点=51点満点)
+            let score = 0;
+            for(let i=4; i<=20; i++) { score += vals[`q${i}`]; }
 
-        // アニメーション処理（適正コストと機会損失額）
-        animateValue('optimal-cost-display', 0, optimalAnnualCost, 1000);
-        animateValue('loss-display', 0, finalLossAmount, 1200);
+            // 1. 業種別の適正広告費コスト計算率
+            let optimalRate = 0.07;
+            if(industry === 'lawyer') optimalRate = 0.06;
+            if(industry === 'realestate') optimalRate = 0.10;
+            if(industry === 'restaurant') optimalRate = 0.05;
+            if(industry === 'salon') optimalRate = 0.08;
+            if(industry === 'emergency') optimalRate = 0.20;
+            if(industry === 'btob') optimalRate = 0.04;
+
+            const optimalAnnualCost = Math.floor(revenue * optimalRate);
+
+            // 2. 総合点に基づく損失率・リスク評価
+            let baseLossRate = 0;
+            let statusText = "";
+            let statusClass = "";
+
+            if (score <= 26) {
+                baseLossRate = 0.30;
+                statusText = "【重度】投資効率崩壊・デジタル＆次世代リスク過多";
+                statusClass = "status-red";
+            } else if (score <= 40) {
+                baseLossRate = 0.16;
+                statusText = "【中等度】機会損失発生・インフラ移行期のボトルネック";
+                statusClass = "status-yellow";
+            } else {
+                baseLossRate = 0.04;
+                statusText = "【健全】強固な集客インフラ・資産最適化推進状態";
+                statusClass = "status-blue";
+            }
+
+            // 精密加算補正
+            if((vals.q4 === 1 || vals.q7 === 1) && currentAnnualCost > 0) {
+                baseLossRate += 0.06;
+            }
+            if(vals.q10 === 1 && vals.q9 <= 2) {
+                baseLossRate += 0.04;
+            }
+            if(vals.q15 === 1 && vals.q16 === 1) {
+                baseLossRate += 0.05;
+            }
+            if(vals.q20 === 1) {
+                baseLossRate += 0.03;
+            }
+
+            const finalLossAmount = Math.floor(revenue * baseLossRate);
+
+            // 3. アドバイス文生成
+            let advice = `【20軸精密分析結果】
+全20項目にわたる独立した客観データから算出した結果、御社の集客インフラは特定の評価軸において強みと弱みが混在しています。
+特に「顧客リストの未活用」や「感覚による投資ジャッジ」のブロックがボトルネックとなり、本来獲得できているはずの利益が流出しています。新たなマーケティングチャネルを開拓する前に、まずは最も点数の低かったブロック（UI/UXやMEO、紹介のシステム化等）を1つずつ最適化し、穴のない強固な集客バケツを完成させてください。`;
+
+            if(industry === 'emergency') {
+                if(vals.q5 === 1 || vals.q18 === 1) {
+                    advice = `【精密分析結果：緊急解決型ビジネス】
+20軸の診断データが示す通り、即時解決型ビジネスの勝負は「オンライン有料広告の最適化（Q5）」と「問い合わせ後の初動対応スピード（Q18）」の2軸でほぼ決定します。
+現在、この連動ブロックが最適化されておらず対応が遅れているため、年間想定 ${finalLossAmount.toLocaleString()}円の致命的な売上機会損失が生じています。SNSやリアル媒体へ投資を分散させるべきではありません。今すぐ「1時間以内の即応インフラ」と「リスティング広告のCPA徹底管理」にリソースを全投入してください。`;
+                } else {
+                    advice = `【精密分析結果：緊急解決型ビジネス】
+広告運用および初動対応の評価軸は非常に高い水準です。ただし、クリック単価の上昇リスクに備え、今後は「Q10・Q11：AI検索（AIO）」へのデータ仕込みを進め、有料広告一本足打法から「コストのかからない次世代デジタルインフラ」への投資分散を図るべきフェーズにあります。`;
+                }
+            } 
+            else if(industry === 'restaurant' || industry === 'salon') {
+                if(vals.q7 <= 2 || vals.q8 === 2) {
+                    advice = `【精密分析結果：日常利用・リピート店舗ビジネス】
+20軸のデータから、店舗集客の生命線である「Googleマップ口コミ（Q7）」と「ポータルサイト依存度（Q8）」のバランスに大きな課題が検出されました。
+外部ポータルに高額な掲載料を払い続けながら、自社のマップ資産や、Q14・Q15の既存顧客リストへの定期アプローチをサボっている状態は、年間で約 ${finalLossAmount.toLocaleString()}円の損失を生んでいます。新規の広告費を増やすのではなく、公式LINE等のステップ追客を完全にシステム化し、「既存客が自然と自動リピートする構造」への転換を最優先してください。`;
+                } else {
+                    advice = `【精密分析結果：日常利用・リピート店舗ビジネス】
+マップ運用および地域インフラの評価ブロックは極めて健全です。今後は、Q12・Q13のSNS（ショート動画等）のクリエイティブ精度をさらに引き上げ、店舗の絶対的な「ファン化・ブランド化」を推進することで、LTVの極大化を目指してください。`;
+                }
+            }
+            else if(industry === 'lawyer' || industry === 'realestate' || industry === 'btob') {
+                if(vals.q4 === 1 || vals.q16 === 1) {
+                    advice = `【精密分析結果：高単価・信頼検討型ビジネス】
+信頼性と高い検討期間を要するビジネスでは、「紹介ルートの再現性（Q16）」と「スマホでの信頼・導線（Q4）」の2ブロックが成約の絶対条件です。
+紹介が経営者の属人的な人脈（運）に依存し、受け皿となるWEBサイトの導線が弱い場合、せっかくの優良な口コミ見込み客が競合へ流出する最大の原因になります。SNSの更新工数を一度ストップし、紹介を発生させる仕組みの構築と、HPのスマホ導線の徹底的なバグ修正にリソースを集中させてください。`;
+                } else if(vals.q10 === 1 || vals.q9 === 2) {
+                    advice = `【精密分析結果：高単価・信頼検討型ビジネス】
+現在の基盤は強固ですが、「Q10・Q11：次世代AI検索適応度」のブロックに深刻な未来リスクが検出されました。高単価商材を調べる層やビジネス層は、従来の検索（SEO）からChatGPT等を用いたAI検索へ急激に移行しています。このブロックを放置すると、従来のSEOアクセス減少に伴い、2〜3年以内に集客構造が枯渇する恐れがあります。今すぐWEBサイトへ「AIに評価される専門テキスト資産」を公開し、先行者利益を獲得してください。`;
+                }
+            }
+
+            // 4. 表示の切り替え
+            document.getElementById('assessment-form').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+
+            const badge = document.getElementById('result-badge');
+            badge.textContent = statusText;
+            badge.className = `result-status ${statusClass}`;
+            document.getElementById('advice-content').textContent = advice;
+
+            // アニメーション実行
+            animateValue('optimal-cost-display', 0, optimalAnnualCost, 1000);
+            animateValue('loss-display', 0, finalLossAmount, 1200);
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        } catch (err) {
+            alert("システムエラーが発生しました。ブラウザを再読み込みしてもう一度お試しください。");
+            console.error(err);
+        }
     });
 
     function animateValue(id, start, end, duration) {
